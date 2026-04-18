@@ -1,0 +1,52 @@
+# Benedikt Sauter — PLACEHOLDER
+
+This file is a placeholder. Rename to `benedikt-sauter.md` once filled.
+
+## How to generate this voice
+
+1. Collect 5–10 writing samples from Benedikt:
+   - His LinkedIn posts (at least 5)
+   - Interview transcripts (podcast appearances, press)
+   - Blog posts from the Xentral blog authored by him
+   - Keynote transcripts if available
+
+2. In a Claude Code session (can be in this repo or elsewhere), run:
+
+   `/anthropic-skills:writing-style-analyzer`
+
+3. Paste all samples. Prompt:
+
+   > "Produce a reusable Style Card for Benedikt Sauter (CEO of Xentral). Follow the same structure as config/voices/xentral-brand.md. Capture his personal voice, recurring themes, hook patterns, what he avoids. The output will be used to rewrite content in his voice for LinkedIn posts, keynote snippets, and thought-leadership pieces."
+
+4. Save the result as `config/voices/benedikt-sauter.md`.
+5. Restart dev server — Benedikt becomes a selectable voice in the UI.
+
+## Minimum viable content (if you want a starting draft before doing the full analyzer run)
+
+```markdown
+# Benedikt Sauter
+
+Voice card for Benedikt Sauter, CEO and co-founder of Xentral.
+
+## Vibe
+[Describe from 3 observations of his writing]
+
+## Core themes
+- [Theme 1]
+- [Theme 2]
+- [Theme 3]
+
+## Hook patterns
+- [Pattern 1, with example]
+- [Pattern 2, with example]
+
+## Mechanics
+- Typical sentence length
+- Punctuation habits
+- Word choices he favors / avoids
+
+## What makes his voice distinct from the Xentral brand voice
+[The delta — personal vs corporate]
+```
+
+Replace all brackets with real observations from his writing.

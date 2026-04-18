@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --app --eslint --no-src-dir --import-alias=\"@/*\" --no-turbopack --yes)",
+      "Bash(npm install *)",
+      "Bash(npx shadcn@latest add button card textarea select slider checkbox switch label badge skeleton --yes)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3000/api/config)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(pkill -f \"next dev\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(printenv ANTHROPIC_API_KEY)",
+      "Bash(claude auth *)",
+      "Bash(security find-generic-password *)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}
