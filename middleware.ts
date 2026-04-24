@@ -9,6 +9,8 @@ import { NextRequest, NextResponse } from "next/server";
  *
  * Browsers show a native username/password prompt on first request and cache
  * the credentials for the session.
+ *
+ * Uses Web Standard atob (not Node's Buffer) so this works in the Edge runtime.
  */
 
 export function middleware(req: NextRequest) {
@@ -23,13 +25,17 @@ export function middleware(req: NextRequest) {
   if (auth) {
     const [scheme, encoded] = auth.split(" ");
     if (scheme === "Basic" && encoded) {
-      const decoded = Buffer.from(encoded, "base64").toString("utf-8");
-      const idx = decoded.indexOf(":");
-      const suppliedUser = idx === -1 ? decoded : decoded.slice(0, idx);
-      const suppliedPass = idx === -1 ? "" : decoded.slice(idx + 1);
+      try {
+        const decoded = atob(encoded);
+        const idx = decoded.indexOf(":");
+        const suppliedUser = idx === -1 ? decoded : decoded.slice(0, idx);
+        const suppliedPass = idx === -1 ? "" : decoded.slice(idx + 1);
 
-      if (suppliedUser === user && suppliedPass === pass) {
-        return NextResponse.next();
+        if (suppliedUser === user && suppliedPass === pass) {
+          return NextResponse.next();
+        }
+      } catch {
+        // malformed base64 — fall through to 401
       }
     }
   }
@@ -46,7 +52,6 @@ export const config = {
   matcher: [
     /*
      * Match all request paths except for Next.js internals and static files.
-     * (_next, favicon, etc. stay unprotected so the auth prompt loads clean.)
      */
     "/((?!_next/static|_next/image|favicon.ico).*)",
   ],
